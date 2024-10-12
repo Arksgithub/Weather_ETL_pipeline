@@ -13,6 +13,10 @@ def extract_data(city):
     url = f"{base_url}?q={city}&appid={api_key}"
     response = requests.get(url)
     
+    if response.status_code != 200:
+        raise Exception(f"Error fetching data: {response.status_code} - {response.text}")
+    
+    return response.json()
 
 # 2. Transform
 def transform_data(data):
